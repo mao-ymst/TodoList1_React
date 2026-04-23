@@ -13,7 +13,7 @@ export default function App() {
   }
 
   const addTask = () => {
-    if (inputText === "" || !inputText.trim) return;
+    if (inputText === "" || !inputText.trim()) return;
 
     const newTask = {
       id: Date.now(),
@@ -25,7 +25,7 @@ export default function App() {
     setTasks([...tasks, newTask]);
 
     setInputText("");
-    
+
   }
 
   const deleteTask = (id) => {
@@ -35,30 +35,30 @@ export default function App() {
   }
 
   const toggleTask = (id) => {
-    const newTasks = 
+    const newTasks =
       tasks.map((task) => {
-        if(task.id === id) {
-          return {...task, isDone: !task.isDone};
+        if (task.id === id) {
+          return { ...task, isDone: !task.isDone };
         }
         return task;
       })
-      setTasks(newTasks);
+    setTasks(newTasks);
   }
 
 
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className='app-container'>
       <h1>My Todo List</h1>
       <TodoInput inputText={inputText} onChange={handleChange} onAdd={addTask} />
       <p>入力中の文字：{inputText}</p>
-      <ul>
+      <ul className='todo-list'>
         {tasks.map((task) => {
           return (
-            <TodoItem 
-              task={task} 
-              onDelete={deleteTask} 
-              onToggle={toggleTask}/>
+            <TodoItem
+              task={task}
+              onDelete={deleteTask}
+              onToggle={toggleTask} />
           )
         })
         }

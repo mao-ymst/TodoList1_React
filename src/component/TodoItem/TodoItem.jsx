@@ -1,25 +1,27 @@
 import React from 'react'
+import './TodoItem.css'
 
 export default function TodoItem({ task, onDelete, onToggle }) {
     return (
         <li
+            className='todo-item'
             key={task.id}
-            style={{ listStyle: 'none' }}
         >
             <input
+                className='todo-checkbox'
                 type='checkbox'
                 checked={task.isDone}
                 onClick={() => onToggle(task.id)}
             />
-            <span 
-                style={{
-                    textDecoration: task.isDone ? "line-through" : "none", 
-                    cursor: 'pointer'
-                    }}>
+            <span
+                className={`todo-text ${task.isDone ? "is-done" : ""}`}>
                 {task.text}
             </span>
-            <span>({task.createdAt})</span>
+            <span
+                className='todo-date'>
+                ({task.createdAt})</span>
             <button
+                className='delete-btn'
                 onClick={(e) => {
                     e.stopPropagation()
                     onDelete(task.id)

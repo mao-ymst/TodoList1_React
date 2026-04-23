@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import TodoInput from './component/TodoInput';
-import TodoItem from './component/TodoItem';
+import TodoInput from './component/TodoInput/TodoInput';
+import TodoItem from './component/TodoItem/TodoItem';
+import './App.css'
 
 export default function App() {
   const [tasks, setTasks] = useState([]);

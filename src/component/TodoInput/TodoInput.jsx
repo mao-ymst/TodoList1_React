@@ -1,14 +1,18 @@
 import React from 'react'
+import './TodoInput.css'
 
 export default function TodoInput({ inputText, onChange, onAdd }) {
     return (
-        <div>
+        <div className='input-container'>
             <input
+                className='task-input'
                 type='text'
                 placeholder='タスクを入力してください'
                 value={inputText}
                 onChange={onChange} />
-            <button onClick={onAdd}>追加</button>
+            <button
+                className='add-button'
+                onClick={onAdd}>追加</button>
 
         </div>
     )

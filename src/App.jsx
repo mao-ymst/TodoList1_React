@@ -23,7 +23,7 @@ export default function App() {
 
     setTasks([...tasks, newTask]);
 
-    setInputText("")
+    setInputText("");
     
   }
 
@@ -33,6 +33,19 @@ export default function App() {
     setTasks(newTasks);
   }
 
+  const toggleTask = (id) => {
+    const newTasks = 
+      tasks.map((task) => {
+        if(task.id === id) {
+          return {...task, isDone: !task.isDone};
+        }
+        return task;
+      })
+      setTasks(newTasks);
+  }
+
+
+
   return (
     <div style={{ padding: '20px' }}>
       <h1>My Todo List</h1>
@@ -41,7 +54,10 @@ export default function App() {
       <ul>
         {tasks.map((task) => {
           return (
-            <TodoItem task={task} onDelete={deleteTask} />
+            <TodoItem 
+              task={task} 
+              onDelete={deleteTask} 
+              onToggle={toggleTask}/>
           )
         })
         }
@@ -72,3 +88,6 @@ export default function App() {
 //削除してくれる関数を作成　filter 
 //指定したid以外のtaskを残し　新しい配列を作る
 // buttonに削除機能をつける
+
+//7 taskの完了・未完了の関数(状態を反転させる)を作成
+//作成した関数をapp-->TodoItemに渡す props

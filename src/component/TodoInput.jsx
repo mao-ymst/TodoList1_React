@@ -8,7 +8,7 @@ export default function TodoInput({ inputText, onChange, onAdd }) {
                 placeholder='タスクを入力してください'
                 value={inputText}
                 onChange={onChange} />
-            <button onAdd={onAdd}>追加</button>
+            <button onClick={onAdd}>追加</button>
 
         </div>
     )
@@ -16,4 +16,5 @@ export default function TodoInput({ inputText, onChange, onAdd }) {
 
 
 //4 入力欄とボタン担当のページを作る
-//TodoInput：子　が文字を受け取ったら　App：親　へ報告できるように　props用意
+//TodoInput：子　が文字を受け取ったら　App：親　へ報告できるように
+// props用意　名前は渡された名前と同じになるように注意

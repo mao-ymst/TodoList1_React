@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import TodoInput from './component/TodoInput';
+import TodoItem from './component/TodoItem';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputText, setInputText] = useState("");
 
+
+  const handleChange = (e) => {
+    setInputText(e.target.value);
+  }
+
   const addTask = () => {
-    if(inputText === "" || !inputText.trim) return;
+    if (inputText === "" || !inputText.trim) return;
 
     const newTask = {
       id: Date.now(),
@@ -18,27 +24,27 @@ export default function App() {
     setTasks([...tasks, newTask]);
 
     setInputText("")
+    
   }
 
-  const handleChange = (e) => {
-    setInputText(e.target.value);
+  const deleteTask = (id) => {
+    const newTasks =
+      tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
   }
 
   return (
-    <div style={{padding: '20px'}}>
+    <div style={{ padding: '20px' }}>
       <h1>My Todo List</h1>
-      <TodoInput value={inputText} onChange={handleChange} onAdd={addTask}/>
+      <TodoInput inputText={inputText} onChange={handleChange} onAdd={addTask} />
       <p>入力中の文字：{inputText}</p>
       <ul>
         {tasks.map((task) => {
           return (
-          <li key={task.id}>
-            {task.text}
-            <span>({task.createdAt})</span>
-          </li>
-        )
-      })
-      }
+            <TodoItem task={task} onDelete={deleteTask} />
+          )
+        })
+        }
       </ul>
     </div>
   )
@@ -58,4 +64,11 @@ export default function App() {
 //3 tasksにたまったデータを取り出してlistで表示する map
 //list １つ１つにユニークなkeyをつける　判別できるように
 
-//4 TodoInput.jsxの呼び出しと必要なpropsを渡す
+//4 入力欄とボタン担当のコンポーネントに移動させる
+// TodoInput.jsxの呼び出しと必要なpropsを渡す
+
+//5 削除機能を作成
+//各リストの横に削除ボタンを表示
+//削除してくれる関数を作成　filter 
+//指定したid以外のtaskを残し　新しい配列を作る
+// buttonに削除機能をつける

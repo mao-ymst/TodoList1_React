@@ -28,3 +28,12 @@
 .add-button:hover {
     background-color: #188a10;
 }
+
+.priority-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+

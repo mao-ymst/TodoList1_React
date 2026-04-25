@@ -6,6 +6,7 @@ import './App.css'
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [priority, setPriority] = "medium";
 
 
   const handleChange = (e) => {
@@ -19,12 +20,14 @@ export default function App() {
       id: Date.now(),
       text: inputText,
       isDone: false,
-      createdAt: new Date().toLocaleDateString()
+      createdAt: new Date().toLocaleDateString(),
+      priority: priority
     };
 
     setTasks([...tasks, newTask]);
 
     setInputText("");
+    setPriority("medium");
 
   }
 
@@ -50,7 +53,12 @@ export default function App() {
   return (
     <div className='app-container'>
       <h1>My Todo List</h1>
-      <TodoInput inputText={inputText} onChange={handleChange} onAdd={addTask} />
+      <TodoInput
+        inputText={inputText}
+        onChange={handleChange}
+        onAdd={addTask}
+        priority={priority}
+        onPriorityChange={setPriority} />
       <p>入力中の文字：{inputText}</p>
       <ul className='todo-list'>
         {tasks.map((task) => {
@@ -92,3 +100,10 @@ export default function App() {
 
 //7 taskの完了・未完了の関数(状態を反転させる)を作成
 //作成した関数をapp-->TodoItemに渡す props
+
+//9 taskに優先順位をつける
+//priorityを覚えて管理するstateを設定
+//task追加でpriorityを追加
+//taskに追加したらmediumに戻るように設定
+//todoInputにpriorityを渡す ※priorityの変化したときの状態も渡す
+

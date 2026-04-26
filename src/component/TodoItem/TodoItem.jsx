@@ -11,11 +11,14 @@ export default function TodoItem({ task, onDelete, onToggle }) {
                 className='todo-checkbox'
                 type='checkbox'
                 checked={task.isDone}
-                onClick={() => onToggle(task.id)}
+                onChange={() => onToggle(task.id)}
             />
             <span
                 className={`todo-text ${task.isDone ? "is-done" : ""}`}>
                 {task.text}
+            </span>
+            <span className={`priority-badge ${task.priority}`}>
+                {task.priority}
             </span>
             <span
                 className='todo-date'>
@@ -42,3 +45,6 @@ export default function TodoItem({ task, onDelete, onToggle }) {
 //checkboxに反転の関数をつける
 //span: text完了時に線を引くスタイルをつける
 //削除ボタンを押したときに勝手に完了にならないようにする　stopProgation
+
+//11 priorityをlistに表示させる 文字を表示する場所作成
+//listのpriorityにデザインをつける　priorityごとの変わるように設定

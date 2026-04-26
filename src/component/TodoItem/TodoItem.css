@@ -34,14 +34,36 @@
 .delete-btn {
     padding: 4px 8px;
     margin-right: 10px;
-    background-color: #f75b5b;
-    color: #fff;
+    background-color: lightgray;
+    color: #888;
     border: none;
     border-radius: 4px;
-    border: 1px solid #f75b5b;
+    border: 1px solid lightgray;
     cursor: pointer;
 }
 
 .delete-btn:hover {
-    background-color: #ac3636;
+    background-color: lightgray;
+}
+
+.priority-badge {
+    padding: 2px 8px;
+    font-size: 10px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+
+.priority-badge.high {
+    background-color: #ff4d4d;
+}
+
+.priority-badge.medium {
+    background-color: #ffaa00;
+}
+
+.priority-badge.low {
+    background-color: #4da6ff;
 }

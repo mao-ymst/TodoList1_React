@@ -6,7 +6,7 @@ import './App.css'
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputText, setInputText] = useState("");
-  const [priority, setPriority] = "medium";
+  const [priority, setPriority] = useState("medium");
 
 
   const handleChange = (e) => {
@@ -64,6 +64,7 @@ export default function App() {
         {tasks.map((task) => {
           return (
             <TodoItem
+              key={task.id}
               task={task}
               onDelete={deleteTask}
               onToggle={toggleTask} />

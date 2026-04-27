@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import TodoInput from './component/TodoInput/TodoInput';
 import TodoItem from './component/TodoItem/TodoItem';
 import './App.css'
+import FilterButtons from './component/TodoFilter/FilterButtons';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputText, setInputText] = useState("");
   const [priority, setPriority] = useState("medium");
-
+  const [filter, setFilter] = useState("all");
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -48,6 +49,12 @@ export default function App() {
     setTasks(newTasks);
   }
 
+  const filteredTasks = 
+  [...tasks].filter((task) => {
+    if(filter === "active") return !task.isDone;
+    if(filter === "completed") return task.isDone;
+    return true; 
+  })
 
 
   return (
@@ -60,8 +67,13 @@ export default function App() {
         priority={priority}
         onPriorityChange={setPriority} />
       <p>入力中の文字：{inputText}</p>
+
+    <FilterButtons 
+      
+      onFilterChange={setFilter}/>
+
       <ul className='todo-list'>
-        {tasks.map((task) => {
+        {filteredTasks.map((task) => {
           return (
             <TodoItem
               key={task.id}
@@ -108,3 +120,10 @@ export default function App() {
 //taskに追加したらmediumに戻るように設定
 //todoInputにpriorityを渡す ※priorityの変化したときの状態も渡す
 
+//12 今どの状態のフィルターか覚えるための stateを作成
+//filterで絞り込んだtaskを作る　派生state   //return true; --> all
+//画面に切り替えbuttonを用意する
+//buttonにfilterの条件の結びつける
+// list にfilter内容を反映させるためにtasks.map-->filteredTasks.mapに変更
+//filterbuttonsのコンポーネントに引っ越し
+//filterButtonsを呼び出し　props渡す

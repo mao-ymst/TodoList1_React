@@ -1,12 +1,25 @@
 import React from 'react'
 import "./FilterButtons.css"
 
-export default function FilterButtons({ onFilterChange }) {
+export default function FilterButtons({ currentFilter, onFilterChange }) {
     return (
         <div className='filter-buttons'>
-            <button onClick={() => onFilterChange("all")}>全て</button>
-            <button onClick={() => onFilterChange("active")}>未完了</button>
-            <button onClick={() => onFilterChange("completed")}>完了</button>
+            <button
+                onClick={() => onFilterChange("all")}
+                className={currentFilter === "all" ? "active" : ""}>
+                全て
+            </button>
+            <button
+                onClick={() => onFilterChange("active")}
+                className={currentFilter === "active" ? "active" : ""}
+            >
+                未完了
+            </button>
+            <button
+                onClick={() => onFilterChange("completed")}
+                className={currentFilter === "completed" ? "active" : ""}>
+                完了
+            </button>
         </div>
 
     )

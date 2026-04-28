@@ -9,6 +9,7 @@ export default function App() {
   const [inputText, setInputText] = useState("");
   const [priority, setPriority] = useState("medium");
   const [filter, setFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("added");
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -49,13 +50,24 @@ export default function App() {
     setTasks(newTasks);
   }
 
-  const filteredTasks = 
-  [...tasks].filter((task) => {
-    if(filter === "active") return !task.isDone;
-    if(filter === "completed") return task.isDone;
-    return true; 
-  })
+  const filteredTasks =
+    tasks.filter((task) => {
+      if (filter === "active") return !task.isDone;
+      if (filter === "completed") return task.isDone;
+      return true;
+    })
+    .sort((a,b) => {
+      if(sortBy === "priority") {
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      }
+      return b.id - a.id;
+    })
 
+  const priorityOrder = {
+      high: 1,
+      meduim: 2,
+      low: 3
+  }
 
   return (
     <div className='app-container'>
@@ -68,9 +80,16 @@ export default function App() {
         onPriorityChange={setPriority} />
       <p>入力中の文字：{inputText}</p>
 
-    <FilterButtons 
-      
-      onFilterChange={setFilter}/>
+      <FilterButtons
+        currentFilter={filter}
+        onFilterChange={setFilter} />
+
+      <div>
+        <button onClick={() => setSortBy("added")}>
+          追加順
+        </button>
+      </div>
+
 
       <ul className='todo-list'>
         {filteredTasks.map((task) => {
@@ -127,3 +146,10 @@ export default function App() {
 // list にfilter内容を反映させるためにtasks.map-->filteredTasks.mapに変更
 //filterbuttonsのコンポーネントに引っ越し
 //filterButtonsを呼び出し　props渡す
+
+//14 優先順位順に並べ替えるソート機能を作る
+//並び替えの状態を覚えるstateを設定
+//priorityで並べ替えができるように　優先順位を数字に変換
+//filterで並び替えた後の結果をさらに　sortで並べ替える
+//filterとsortを繋げる　filter部分に足す
+//filterButtons の下に動作確認ボタンを作成

@@ -1,11 +1,23 @@
-.filter-buttons {
+/* .filter-buttons {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin: 20px 0;
+} */
+
+.todo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #b3d9ff;
+    border-radius: 12px;
+
 }
 
-.filter-buttons button {
+/* .filter-buttons--> control-groupに変更 */
+.control-group button {
     padding: 6px 16px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
@@ -15,12 +27,12 @@
     transition: all 0.2s ease;
 }
 
-.filter-buttons button:hover {
+.control-group button:hover {
     background-color: #eee;
     border-color: #bbb;
 }
 
-.filter-buttons button.active {
+.control-group button.active {
     background-color: #333;
     color: white;
     border-color: #333;

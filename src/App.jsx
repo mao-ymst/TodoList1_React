@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TodoInput from './component/TodoInput/TodoInput';
 import TodoItem from './component/TodoItem/TodoItem';
 import './App.css'
-import FilterButtons from './component/TodoFilter/FilterButtons';
+import TodoControls from './component/TodoControls/TodoControls';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -50,24 +50,26 @@ export default function App() {
     setTasks(newTasks);
   }
 
+  const priorityOrder = {
+    high: 1,
+    medium: 2,
+    low: 3
+  }
+
+
   const filteredTasks =
     tasks.filter((task) => {
       if (filter === "active") return !task.isDone;
       if (filter === "completed") return task.isDone;
       return true;
     })
-    .sort((a,b) => {
-      if(sortBy === "priority") {
-        return priorityOrder[a.priority] - priorityOrder[b.priority];
-      }
-      return b.id - a.id;
-    })
+      .sort((a, b) => {
+        if (sortBy === "priority") {
+          return priorityOrder[a.priority] - priorityOrder[b.priority];
+        }
+        return a.id - b.id;
+      })
 
-  const priorityOrder = {
-      high: 1,
-      meduim: 2,
-      low: 3
-  }
 
   return (
     <div className='app-container'>
@@ -80,16 +82,11 @@ export default function App() {
         onPriorityChange={setPriority} />
       <p>入力中の文字：{inputText}</p>
 
-      <FilterButtons
+      <TodoControls
         currentFilter={filter}
-        onFilterChange={setFilter} />
-
-      <div>
-        <button onClick={() => setSortBy("added")}>
-          追加順
-        </button>
-      </div>
-
+        onFilterChange={setFilter}
+        currentSort={sortBy}
+        onSortChange={setSortBy} />
 
       <ul className='todo-list'>
         {filteredTasks.map((task) => {
@@ -153,3 +150,5 @@ export default function App() {
 //filterで並び替えた後の結果をさらに　sortで並べ替える
 //filterとsortを繋げる　filter部分に足す
 //filterButtons の下に動作確認ボタンを作成
+
+//16 todocontrolsで必要なpropsを渡す

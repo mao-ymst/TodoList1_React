@@ -11,9 +11,16 @@
     gap: 15px;
     margin: 20px 0;
     padding: 10px;
-    background-color: #b3d9ff;
+    background-color: #dbecfd;
     border-radius: 12px;
 
+}
+
+.label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    min-width: 70px;
 }
 
 /* .filter-buttons--> control-groupに変更 */

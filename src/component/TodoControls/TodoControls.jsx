@@ -26,7 +26,7 @@ export default function TodoControls({ currentFilter, onFilterChange, currentSor
 
 
                 <div className='control-group'>
-                    <span>並び替え：</span>
+                    <span className='label'>並び替え：</span>
                     <button
                         onClick={() => onSortChange("added")}
                         className={currentSort === "added" ? "active" : ""}>

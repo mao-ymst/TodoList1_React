@@ -10,6 +10,7 @@ export default function App() {
   const [priority, setPriority] = useState("medium");
   const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("added");
+  
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -151,4 +152,4 @@ export default function App() {
 //filterとsortを繋げる　filter部分に足す
 //filterButtons の下に動作確認ボタンを作成
 
-//16 todocontrolsで必要なpropsを渡す
+//16 todocontrolsで必要なpropsを渡す sort

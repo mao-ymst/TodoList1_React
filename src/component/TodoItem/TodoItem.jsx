@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './TodoItem.css'
 
-export default function TodoItem({ task, onDelete, onToggle }) {
+export default function TodoItem({ task, onDelete, onToggle, onUpdate }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(task.text)
 
@@ -12,12 +12,23 @@ export default function TodoItem({ task, onDelete, onToggle }) {
             {isEditing ? (
                 // 編集モード
                 <>
+                <div className='edit-area'>
                     <input
+                        className='edit-input'
                         type='text'
                         value={editText}
-                        onChange={(e) => setEditText(e.target.value)}/>
-                    <button onClick={() => setIsEditing(false)}>保存</button>
-                    <button onClick={() => setIsEditing(false)}>キャンセル</button>
+                        onChange={(e) => setEditText(e.target.value)} />
+                    <button 
+                        className='save-btn'
+                        onClick={() => {
+                            onUpdate(task.id, editText);
+                            setIsEditing(false)
+                    }}>保存</button>
+                    <button
+                        className='cancel-btn'
+                        onClick={() => setIsEditing(false)}>キャンセル</button>
+
+                </div>
                 </>
             ) : (
                 // 通常モード
@@ -39,6 +50,7 @@ export default function TodoItem({ task, onDelete, onToggle }) {
                         className='todo-date'>
                         ({task.createdAt})</span>
                     <button
+                        className='edit-btn'
                         onClick={() => setIsEditing(true)}>
                         編集
                     </button>
@@ -78,3 +90,6 @@ export default function TodoItem({ task, onDelete, onToggle }) {
 //保存ボタンが押された時の処理(false)に変更
 //編集用ボタンの設置
 //保存を実行する、中身のデータを書き換える関数をappに作成
+//updateTaskをpropsで受け取る
+
+//19 編集時のCSSを追加する

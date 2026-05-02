@@ -10,7 +10,7 @@ export default function App() {
   const [priority, setPriority] = useState("medium");
   const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("added");
-  
+
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -72,6 +72,14 @@ export default function App() {
       })
 
 
+  const updateTask = (id, newText) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, text: newText } : task
+      )
+    );
+  };
+
   return (
     <div className='app-container'>
       <h1>My Todo List</h1>
@@ -96,7 +104,8 @@ export default function App() {
               key={task.id}
               task={task}
               onDelete={deleteTask}
-              onToggle={toggleTask} />
+              onToggle={toggleTask}
+              onUpdate={updateTask} />
           )
         })
         }
@@ -153,3 +162,7 @@ export default function App() {
 //filterButtons の下に動作確認ボタンを作成
 
 //16 todocontrolsで必要なpropsを渡す sort
+
+//18 編集した中身のデータを書き換える関数をappに作成
+//　編集しているtaskのidと編集前のtaskのidが一致したら、テキストを上書きした新しいオブジェクトを作る関数を追加
+// TodoItem で　updateTaskをpropsとして渡す

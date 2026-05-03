@@ -9,15 +9,20 @@ export default function TodoInput({ inputText, onChange, onAdd, priority, onPrio
                 type='text'
                 placeholder='タスクを入力してください'
                 value={inputText}
-                onChange={onChange} />
+                onChange={onChange} 
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        onAdd();
+                    }
+                }}/>
 
             <select
                 value={priority}
                 onChange={(e) => onPriorityChange(e.target.value)}
                 className='priority-select'>
-                <option value="high">"HIGH"</option>
-                <option value="medium">"MEDIUM"</option>
-                <option value="low">"LOW"</option>
+                <option value="high">HIGH</option>
+                <option value="medium">MEDIUM</option>
+                <option value="low">LOW</option>
 
             </select>
             <button
@@ -36,3 +41,6 @@ export default function TodoInput({ inputText, onChange, onAdd, priority, onPrio
 //10 priority関係のpropsを受け取る
 // 入力欄にpriorityのセレクトプルダウンを作る
 //見た目を整える css
+
+//21 追加をEnterキーでできるようにする
+//onKeyDownと条件付けを設置

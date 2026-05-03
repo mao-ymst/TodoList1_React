@@ -92,6 +92,10 @@ export default function App() {
   return (
     <div className='app-container'>
       <h1>My Todo List</h1>
+      <p>
+        残りタスク：{tasks.filter(task=> !task.isDone).length}件／全体：{tasks.length}件
+      </p>
+      
       <TodoInput
         inputText={inputText}
         onChange={handleChange}
@@ -179,3 +183,7 @@ export default function App() {
 //20 dateをtasksが変わるたびに自動でdataを保存できるようにする　localStorage
 //date で保存する　useEffext
 //dateを読み込む(読み出し)　dataがあれば使い、なければ空の配列　tasks useState
+
+//22 残りの件数カウンター(あといくつ終わらせたらいいか)を作る
+//taskの中からまだ数え終わっていないtaskを数える
+//表示する内容を作成

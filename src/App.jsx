@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TodoInput from './component/TodoInput/TodoInput';
 import TodoItem from './component/TodoItem/TodoItem';
 import './App.css'
 import TodoControls from './component/TodoControls/TodoControls';
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('my-todo-list');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
   const [inputText, setInputText] = useState("");
   const [priority, setPriority] = useState("medium");
   const [filter, setFilter] = useState("all");
@@ -79,6 +82,12 @@ export default function App() {
       )
     );
   };
+
+  useEffect(() => {
+    localStorage.setItem('my-todo-list', JSON.stringify(tasks));
+  }, [tasks]);
+
+
 
   return (
     <div className='app-container'>
@@ -166,3 +175,7 @@ export default function App() {
 //18 編集した中身のデータを書き換える関数をappに作成
 //　編集しているtaskのidと編集前のtaskのidが一致したら、テキストを上書きした新しいオブジェクトを作る関数を追加
 // TodoItem で　updateTaskをpropsとして渡す
+
+//20 dateをtasksが変わるたびに自動でdataを保存できるようにする　localStorage
+//date で保存する　useEffext
+//dateを読み込む(読み出し)　dataがあれば使い、なければ空の配列　tasks useState

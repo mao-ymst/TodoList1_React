@@ -83,6 +83,12 @@ export default function App() {
     );
   };
 
+  const clearCompleted = () => {
+    const remainingTasks =
+      tasks.filter((task) => !task.isDone);
+    setTasks(remainingTasks);
+  };
+
   useEffect(() => {
     localStorage.setItem('my-todo-list', JSON.stringify(tasks));
   }, [tasks]);
@@ -93,9 +99,15 @@ export default function App() {
     <div className='app-container'>
       <h1>My Todo List</h1>
       <p>
-        残りタスク：{tasks.filter(task=> !task.isDone).length}件／全体：{tasks.length}件
+        残りタスク：{tasks.filter(task => !task.isDone).length}件／全体：{tasks.length}件
       </p>
-      
+
+      <button
+        className='clear-completed-btn'
+        onClick={clearCompleted}
+        disabled={!tasks.some(task => task.isDone)}>
+        完了済みを一括削除
+      </button>
       <TodoInput
         inputText={inputText}
         onChange={handleChange}
@@ -187,3 +199,8 @@ export default function App() {
 //22 残りの件数カウンター(あといくつ終わらせたらいいか)を作る
 //taskの中からまだ数え終わっていないtaskを数える
 //表示する内容を作成
+
+//23 完了済みを一括削除するボタンを作る
+//完了した(チェックされた)taskを削除する関数を作成する
+//buttonを設置する 該当するtaskがなければボタンを無効化する
+//見た目を整える

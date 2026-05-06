@@ -12,23 +12,23 @@ export default function TodoItem({ task, onDelete, onToggle, onUpdate }) {
             {isEditing ? (
                 // 編集モード
                 <>
-                <div className='edit-area'>
-                    <input
-                        className='edit-input'
-                        type='text'
-                        value={editText}
-                        onChange={(e) => setEditText(e.target.value)} />
-                    <button 
-                        className='save-btn'
-                        onClick={() => {
-                            onUpdate(task.id, editText);
-                            setIsEditing(false)
-                    }}>保存</button>
-                    <button
-                        className='cancel-btn'
-                        onClick={() => setIsEditing(false)}>キャンセル</button>
+                    <div className='edit-area'>
+                        <input
+                            className='edit-input'
+                            type='text'
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)} />
+                        <button
+                            className='save-btn'
+                            onClick={() => {
+                                onUpdate(task.id, editText);
+                                setIsEditing(false)
+                            }}>保存</button>
+                        <button
+                            className='cancel-btn'
+                            onClick={() => setIsEditing(false)}>キャンセル</button>
 
-                </div>
+                    </div>
                 </>
             ) : (
                 // 通常モード
@@ -51,14 +51,18 @@ export default function TodoItem({ task, onDelete, onToggle, onUpdate }) {
                         ({task.createdAt})</span>
                     <button
                         className='edit-btn'
-                        onClick={() => setIsEditing(true)}>
+                        onClick={() => {
+                            setEditText(task.text);
+                            setIsEditing(true);
+                        }}>
                         編集
                     </button>
                     <button
                         className='delete-btn'
                         onClick={(e) => {
-                            e.stopPropagation()
-                            onDelete(task.id)
+                            e.stopPropagation();
+                            if (window.confirm('本当にこのタスクを削除してもいい？'))
+                                onDelete(task.id);
                         }}>
                         削除
                     </button>
@@ -93,3 +97,7 @@ export default function TodoItem({ task, onDelete, onToggle, onUpdate }) {
 //updateTaskをpropsで受け取る
 
 //19 編集時のCSSを追加する
+
+//24 削除する前に本当に消していいか確認するようにする　onClick
+
+//25 編集機能でキャンセルしたら　編集input内のテキストが元に戻るようにする

@@ -21,7 +21,10 @@ export default function App() {
 
   const addTask = () => {
     if (inputText === "" || !inputText.trim()) return;
-
+    if (inputText.length > 20) {
+      alert("20文字以下にしてください！");
+      return;
+    }
     const newTask = {
       id: Date.now(),
       text: inputText,
@@ -143,6 +146,7 @@ export default function App() {
 //1 まずは大きな枠で動くものを造ってから分割
 //入力テキストを記憶させる箱を作る
 //文字が入力したらstateが更新するようにする　onChange
+//文字数制限を作る
 // inputとstateを連携させる
 
 //2 複数のtaskを保存するためにstateを作成
@@ -204,3 +208,4 @@ export default function App() {
 //完了した(チェックされた)taskを削除する関数を作成する
 //buttonを設置する 該当するtaskがなければボタンを無効化する
 //見た目を整える
+

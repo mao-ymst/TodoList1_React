@@ -14,7 +14,6 @@ export default function App() {
   const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("added");
 
-
   const handleChange = (e) => {
     setInputText(e.target.value);
   }
@@ -92,10 +91,18 @@ export default function App() {
     setTasks(remainingTasks);
   };
 
+  const toggleAllTasks = (isAllDone) => {
+    setTasks(
+      tasks.map((task) => ({
+        ...task,
+        isDone: isAllDone,
+      }))
+    );
+  }
+
   useEffect(() => {
     localStorage.setItem('my-todo-list', JSON.stringify(tasks));
   }, [tasks]);
-
 
 
   return (
@@ -124,7 +131,15 @@ export default function App() {
         onFilterChange={setFilter}
         currentSort={sortBy}
         onSortChange={setSortBy} />
+      <div className='all-select-area'>
+        <input
+          type='checkbox'
+          checked={tasks.length > 0 && tasks.every(task => task.isDone)}
+          onChange={(e) => toggleAllTasks(e.target.checked)}>
+        </input>
+        <span>すべてを完了にする</span>
 
+      </div>
       <ul className='todo-list'>
         {filteredTasks.map((task) => {
           return (
@@ -209,3 +224,8 @@ export default function App() {
 //buttonを設置する 該当するtaskがなければボタンを無効化する
 //見た目を整える
 
+//26 checkbox を選択したら全て選択<->はずす関数を作る isAllDoneはtrue,falseのどちらか
+//checkboxを作る
+//taskにチェックが入っているか確認し　チェック有->全てチェックに自動でチェック付ける　無->チェック外す
+//e.target.checkedで今true,falseかを判断する
+//CSSを整える

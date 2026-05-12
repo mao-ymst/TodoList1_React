@@ -1,7 +1,7 @@
 import React from 'react'
 import "./TodoControls.css"
 
-export default function TodoControls({ currentFilter, onFilterChange, currentSort, onSortChange, currentPriorityFilter, onPriorityFilter }) {
+export default function TodoControls({ currentFilter, onFilterChange, currentSort, onSortChange, currentPriorityFilter, onPriorityFilterChange }) {
     return (
         <>
             <div className='todo-controls'>
@@ -37,16 +37,17 @@ export default function TodoControls({ currentFilter, onFilterChange, currentSor
                         className={currentSort === "priority" ? "active" : ""}>
                         優先順位順
                     </button>
-                    <p>
+
+                    <p className='label'>
                         フィルター：
                         {["all", "high", "medium", "low"].map((p) =>
                             <button
                                 key={p}
-                                onClick={() => onPriorityFilter(p)}>
+                                className={currentPriorityFilter === p ? "active" : ""}
+                                onClick={() => onPriorityFilterChange(p)}>
                                 {p}
                             </button>
                         )}
-
                     </p>
 
 
@@ -75,3 +76,4 @@ export default function TodoControls({ currentFilter, onFilterChange, currentSor
 //todocontrolsそれぞれのCSSを整える
 
 //27　Appで設置したpriorityFilterを設置、propsを受け取る
+//cssを整える

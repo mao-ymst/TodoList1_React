@@ -13,6 +13,7 @@ export default function App() {
   const [priority, setPriority] = useState("medium");
   const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("added");
+  const [priorityFilter, setPriorityfilter] = useState("all");
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -76,6 +77,11 @@ export default function App() {
         return a.id - b.id;
       })
 
+      .filter(task => {
+      if (priorityFilter === "all") return true;
+      return task.priority === priorityFilter;
+    })
+
 
   const updateTask = (id, newText) => {
     setTasks(
@@ -99,6 +105,7 @@ export default function App() {
       }))
     );
   }
+
 
   useEffect(() => {
     localStorage.setItem('my-todo-list', JSON.stringify(tasks));
@@ -130,7 +137,10 @@ export default function App() {
         currentFilter={filter}
         onFilterChange={setFilter}
         currentSort={sortBy}
-        onSortChange={setSortBy} />
+        onSortChange={setSortBy}
+        currentPriorityFilter={priorityFilter}
+        onPriorityFilterChange={setPriorityfilter} />
+
       <div className='all-select-area'>
         <input
           type='checkbox'
@@ -229,3 +239,9 @@ export default function App() {
 //taskにチェックが入っているか確認し　チェック有->全てチェックに自動でチェック付ける　無->チェック外す
 //e.target.checkedで今true,falseかを判断する
 //CSSを整える
+
+//27 priority Filterを作成する
+//新しいpriorityFilterを管理するstateを用意する
+//切り替えようbuttonを作成
+//実際に行うfilter処理を設定する これまでのfilter部分にプラスする
+//作成した内容をtodocontrolsに移動する propsとして渡す

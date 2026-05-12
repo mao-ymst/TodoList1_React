@@ -1,7 +1,7 @@
 import React from 'react'
 import "./TodoControls.css"
 
-export default function TodoControls({ currentFilter, onFilterChange, currentSort, onSortChange }) {
+export default function TodoControls({ currentFilter, onFilterChange, currentSort, onSortChange, currentPriorityFilter, onPriorityFilter }) {
     return (
         <>
             <div className='todo-controls'>
@@ -37,6 +37,18 @@ export default function TodoControls({ currentFilter, onFilterChange, currentSor
                         className={currentSort === "priority" ? "active" : ""}>
                         優先順位順
                     </button>
+                    <p>
+                        フィルター：
+                        {["all", "high", "medium", "low"].map((p) =>
+                            <button
+                                key={p}
+                                onClick={() => onPriorityFilter(p)}>
+                                {p}
+                            </button>
+                        )}
+
+                    </p>
+
 
                 </div>
             </div>
@@ -60,4 +72,6 @@ export default function TodoControls({ currentFilter, onFilterChange, currentSor
 //appで必要なpropsを渡す　ここで受け取る
 //Sortの中身を受け取った内容に書き換える
 //sort部分にもactiveを追加
-//todocontrolsそれぞれのCSSを整える 
+//todocontrolsそれぞれのCSSを整える
+
+//27　Appで設置したpriorityFilterを設置、propsを受け取る
